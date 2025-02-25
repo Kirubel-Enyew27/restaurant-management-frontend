@@ -1,0 +1,16 @@
+.menu-btn {
+    background-color: #e96b45;
+    color: white;
+    border: none;
+    margin-bottom: 10px;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.menu-btn:hover {
+    background-color: #972300;
+    transform: scale(1.05);
+    cursor: pointer;
+}
