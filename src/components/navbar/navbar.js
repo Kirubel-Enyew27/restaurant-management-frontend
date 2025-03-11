@@ -46,7 +46,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link
-                            to="/food/add"
+                            to="/cart/item"
                             className={`link ${activeLink === 'cart' ? 'active' : ''}`}
                             onClick={() => handleLinkClick('cart')}
                         >
