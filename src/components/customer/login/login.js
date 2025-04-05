@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Axios from '../../axiosInstance/axiosInstance';
-import './login.css'; 
+import './login.css';
+
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -33,6 +34,9 @@ function Login() {
             const response = await Axios.post('/v1/customer/login', userData);
             setMessage(response.data.message || 'Login successful!');
             setError(false);
+
+            const token = response.data.data;
+            localStorage.setItem("token", token);
 
             setTimeout(() => {
                 navigate('/food/menu');
