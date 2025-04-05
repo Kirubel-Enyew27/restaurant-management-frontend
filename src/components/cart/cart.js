@@ -1,13 +1,13 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, Container } from "react-bootstrap";
-import "./cart.css";
+import { FaPlus, FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import {
   decrementQuantity,
   incrementQuantity,
   removeItem,
 } from "../redux/cartSlice";
-import { FaTrash } from "react-icons/fa";
+import "./cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -61,7 +61,11 @@ const Cart = () => {
       <div className="total-price">
         <hr />
         <p>
-          <b>Total: ETB {totalPrice}</b>
+          <b style={{margin:"3%"}}>Total: ETB {totalPrice}</b>
+          <button>
+        <FaPlus className="icons" /> 
+        Add
+      </button>
         </p>
         <hr />
       </div>
