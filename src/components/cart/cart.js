@@ -16,7 +16,15 @@ const Cart = () => {
 
   return (
     <Container className="cart-container">
-      <h2 style={{ textAlign: "center", color: "#e96b45" }}>Cart</h2>
+      <h2
+        style={{
+          textAlign: "center",
+          marginBottom: "20px",
+          color: "#e96b45",
+        }}
+      >
+        Cart
+      </h2>
       {Object.keys(cart).length === 0 ? (
         <p style={{ textAlign: "center" }}>Your cart is empty.</p>
       ) : (
@@ -61,11 +69,11 @@ const Cart = () => {
       <div className="total-price">
         <hr />
         <p>
-          <b style={{margin:"3%"}}>Total: ETB {totalPrice}</b>
+          <b style={{ margin: "3%" }}>Total: ETB {totalPrice}</b>
           <button>
-        <FaPlus className="icons" /> 
-        Add
-      </button>
+            <FaPlus className="icons" />
+            Add
+          </button>
         </p>
         <hr />
       </div>
