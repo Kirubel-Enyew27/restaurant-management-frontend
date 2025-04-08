@@ -114,6 +114,31 @@
   margin-top: 0.6rem;
   color: #555;
 }
+.file-input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* or specific width */
+  max-width: 400px; /* optional, adjust as needed */
+}
+
+.file-input {
+  width: 100%;
+  padding-right: 2rem; /* space for the icon */
+}
+
+.clear-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.clear-icon:hover {
+  background-color: #555 !important;
+  border-radius: 50%;
+}
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
