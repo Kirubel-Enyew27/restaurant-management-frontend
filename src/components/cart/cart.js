@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Card, Container } from "react-bootstrap";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { FaPlusCircle, FaShoppingCart, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   decrementQuantity,
   incrementQuantity,
@@ -13,20 +14,26 @@ const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
+  const navigate = useNavigate();
+
+  const handleAddItems = () => {
+    navigate("/food/menu");
+  };
 
   return (
     <Container className="cart-container">
-      <h2
-        style={{
-          textAlign: "center",
-          marginBottom: "20px",
-          color: "#e96b45",
-        }}
-      >
+      <h2 className="text-center mb-4" style={{ color: "#e96b45" }}>
         Cart
       </h2>
       {Object.keys(cart).length === 0 ? (
-        <p style={{ textAlign: "center" }}>Your cart is empty.</p>
+        <>
+          <p className="text-center">Your cart is empty.</p>
+          <div className="text-center mt-3">
+            <Button className="add-item-btn" onClick={handleAddItems}>
+              Add Items
+            </Button>
+          </div>
+        </>
       ) : (
         <>
           {Object.values(cart).map((item) => (
@@ -64,19 +71,28 @@ const Cart = () => {
               </Card.Body>
             </Card>
           ))}
+          <div className="total-price">
+            <hr />
+            <p>
+              <b style={{ margin: "3%" }}>Total: ETB {totalPrice}</b>
+            </p>
+            <hr />
+            <div className="text-center mt-3 d-flex flex-column gap-2 align-items-center">
+              <Button className="add-item-btn" onClick={handleAddItems}>
+                <FaPlusCircle className="icons" />
+                Add More Items
+              </Button>
+              <Button
+                className="checkout-btn"
+                onClick={() => navigate("/checkout")}
+              >
+                <FaShoppingCart className="icons" />
+                Checkout
+              </Button>
+            </div>
+          </div>
         </>
       )}
-      <div className="total-price">
-        <hr />
-        <p>
-          <b style={{ margin: "3%" }}>Total: ETB {totalPrice}</b>
-          <button>
-            <FaPlus className="icons" />
-            Add
-          </button>
-        </p>
-        <hr />
-      </div>
     </Container>
   );
 };

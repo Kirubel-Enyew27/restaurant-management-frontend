@@ -1,16 +1,86 @@
+/* Container styling */
+.menu-container {
+  padding: 40px 20px;
+  margin: auto;
+  background-color: #fffdfb;
+}
+
+/* Responsive grid */
+.menu-container .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* Card styling */
+.menu-container .menu-card {
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.menu-container .menu-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Card image */
+.menu-container .menu-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Card content */
+.menu-container .menu-card .card-body {
+  padding: 20px;
+  color: #e96b45;
+}
+
+/* Menu button styling */
 .menu-btn {
-    background-color: #e96b45;
-    color: white;
-    border: none;
-    margin-bottom: 10px;
-    padding: 12px;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: 0.3s ease;
+  background-color: #e96b45;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: 0.3s ease;
 }
 
 .menu-btn:hover {
-    background-color: #972300;
-    transform: scale(1.05);
-    cursor: pointer;
+  background-color: #972300;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* Quantity buttons container */
+.menu-container .quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+/* Media Queries for mobile responsiveness */
+@media (max-width: 768px) {
+  .menu-container {
+    padding: 20px 10px;
+  }
+
+  .menu-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .menu-container .menu-card img {
+    height: 180px;
+  }
+
+  .menu-btn {
+    width: 100%;
+  }
 }

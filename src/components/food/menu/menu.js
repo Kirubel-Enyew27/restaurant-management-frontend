@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import Axios from "../../axiosInstance/axiosInstance";
-import "./menu.css";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import Axios from "../../axiosInstance/axiosInstance";
 import {
   addToCart,
   decrementQuantity,
   incrementQuantity,
 } from "../../redux/cartSlice";
+import "./menu.css";
 
 function Menu() {
   const dispatch = useDispatch();
@@ -42,85 +42,35 @@ function Menu() {
   return (
     <div className="menu-container">
       <Container>
-        <h2
-          style={{
-            textAlign: "center",
-            marginBottom: "20px",
-            color: "#e96b45",
-          }}
-        >
+        <h2 className="text-center mb-4" style={{ color: "#e96b45" }}>
           Menu
         </h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: "20px",
-          }}
-        >
+        <div className="menu-grid">
           {menu.map((item) => (
-            <div
-              key={item.MealID}
-              style={{ textAlign: "center", marginBottom: "20px" }}
-            >
-              <Card
-                style={{
-                  border: "none",
-                  boxShadow: "0 5px 10px rgba(0, 0, 0, 0.1)",
-                  transition: "box-shadow 0.3s ease-in-out",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.boxShadow =
-                    "0 10px 20px rgba(0, 0, 0, 0.2)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.boxShadow =
-                    "0 5px 10px rgba(0, 0, 0, 0.1)")
-                }
-              >
-                <Card.Img
-                  variant="top"
-                  src={item.ImgUrl}
-                  alt={item.Name}
-                  style={{
-                    width: "250px",
-                    height: "200px",
-                    margin: "10px auto",
-                  }}
-                />
-                <Card.Body style={{ color: "#e96b45" }}>
+            <div key={item.MealID} className="menu-card">
+              <Card style={{ border: "none" }}>
+                <Card.Img variant="top" src={item.ImgUrl} alt={item.Name} />
+                <Card.Body className="card-body">
                   <Card.Title>{item.Name}</Card.Title>
                   <Card.Text>{item.Descriptio}</Card.Text>
                   <Card.Text>Price: ETB {item.Price}</Card.Text>
 
-                  {/* Conditional rendering based on whether the item is in the cart */}
                   {cart[item.MealID] ? (
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
+                    <div className="quantity-control">
                       <Button
                         variant="secondary"
                         onClick={() => dispatch(decrementQuantity(item.MealID))}
-                        className="menu-btn mt-3 w-50"
+                        className="menu-btn"
                       >
                         -
                       </Button>
-                      <span
-                        style={{
-                          margin: "0 10px",
-                          fontWeight: "bold",
-                        }}
-                      >
+                      <span style={{ fontWeight: "bold" }}>
                         {cart[item.MealID].quantity}
                       </span>
                       <Button
                         variant="secondary"
                         onClick={() => dispatch(incrementQuantity(item.MealID))}
-                        className="menu-btn mt-3 w-50"
+                        className="menu-btn"
                       >
                         +
                       </Button>
@@ -129,7 +79,7 @@ function Menu() {
                     <Button
                       variant="primary"
                       onClick={() => dispatch(addToCart(item))}
-                      className="menu-btn mt-3 w-50"
+                      className="menu-btn mt-3"
                     >
                       Add to Cart
                     </Button>
