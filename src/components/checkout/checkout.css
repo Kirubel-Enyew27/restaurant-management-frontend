@@ -1,0 +1,78 @@
+.checkout-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+  color: #333;
+}
+
+.checkout-item {
+  background-color: #fff8f4;
+  border: 1px solid #e96b45;
+  border-radius: 8px;
+}
+
+.checkout-container h2 {
+  font-weight: bold;
+}
+
+/* Card styling for total and Confirm Order button */
+.checkout-container .card.text-end {
+  background-color: #fff0e9;
+  border: 1px solid #e96b45;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.confirm-order-btn {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.confirm-order-btn:hover {
+  background-color: #1e7e34;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.checkout-container div.total-price {
+  text-align: center;
+  color: #e96b45;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .confirm-order-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .checkout-container {
+    padding: 10px;
+  }
+
+  .checkout-item {
+    padding: 10px;
+  }
+
+  .checkout-container h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .checkout-container .card.text-end {
+    text-align: center !important;
+  }
+
+  .checkout-container button {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
