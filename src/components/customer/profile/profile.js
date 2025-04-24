@@ -1,6 +1,8 @@
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useRef, useState } from "react";
 import { FaCheckCircle, FaLock, FaPen, FaTimesCircle } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Axios from "../../axiosInstance/axiosInstance";
 import "./profile.css";
 
@@ -30,6 +32,7 @@ const ProfilePage = () => {
         setUserID(decoded.id);
       } catch (error) {
         console.error("Invalid token:", error);
+        toast.error("Invalid token. Please login again.");
       }
     }
   }, [token]);
@@ -43,6 +46,7 @@ const ProfilePage = () => {
           setUser(response.data.data);
         } catch (error) {
           console.error("Error fetching user data:", error);
+          toast.error("Failed to load user profile.");
         } finally {
           setLoading(false);
         }
@@ -54,7 +58,6 @@ const ProfilePage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
     if (["oldPassword", "newPassword", "confirmPassword"].includes(name)) {
       setFormState((prev) => ({ ...prev, [name]: value }));
     } else {
@@ -86,10 +89,10 @@ const ProfilePage = () => {
         }
       );
       setUser(response.data.data);
-      alert("Profile picture updated!");
+      toast.success("Profile picture updated!");
     } catch (err) {
       console.error("Upload failed:", err);
-      alert("Failed to upload image.");
+      toast.error("Failed to upload profile picture.");
     } finally {
       setPreviewImage("");
       setSelectedImage(null);
@@ -102,10 +105,11 @@ const ProfilePage = () => {
     try {
       const response = await Axios.patch(`/v1/customer/update/${userID}`, user);
       setUser(response.data.data);
-      alert("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating profile:", error);
+      toast.error("Failed to update profile.");
     } finally {
       setUpdating(false);
     }
@@ -115,7 +119,7 @@ const ProfilePage = () => {
     const { oldPassword, newPassword, confirmPassword } = formState;
 
     if (newPassword !== confirmPassword) {
-      alert("New passwords do not match.");
+      toast.error("New passwords do not match.");
       return;
     }
 
@@ -124,30 +128,27 @@ const ProfilePage = () => {
         old_password: oldPassword,
         new_password: newPassword,
       });
-      alert("Password updated!");
+      toast.success("Password updated successfully!");
       setFormState({ oldPassword: "", newPassword: "", confirmPassword: "" });
       setIsChangingPassword(false);
     } catch (err) {
       console.error("Error changing password:", err);
-      alert("Failed to change password.");
+      toast.error("Failed to change password.");
     }
   };
 
   if (loading) return <div>Loading...</div>;
-
   if (!user) return <div>User not found</div>;
 
   return (
     <div className="profile-page">
+      <ToastContainer position="top-right" autoClose={3000} />
       <h2
-        style={{
-          textAlign: "center",
-          marginBottom: "20px",
-          color: "#e96b45",
-        }}
+        style={{ textAlign: "center", marginBottom: "20px", color: "#e96b45" }}
       >
         Profile
       </h2>
+
       <div className="profile-info">
         <img
           src={
@@ -175,14 +176,14 @@ const ProfilePage = () => {
                   onClick={() => {
                     setPreviewImage("");
                     setSelectedImage(null);
-                    fileInputRef.current.value = ""; // Clear input field
+                    fileInputRef.current.value = "";
                   }}
                 />
               )}
             </div>
             {selectedImage && (
               <button onClick={uploadProfilePic} className="upload-btn">
-                {uploading ? "uploading..." : "Upload New Picture"}
+                {uploading ? "Uploading..." : "Upload New Picture"}
               </button>
             )}
             <label>Username</label>
@@ -192,7 +193,6 @@ const ProfilePage = () => {
               value={user.Username || ""}
               onChange={handleInputChange}
             />
-
             <label>Email</label>
             <input
               type="email"
@@ -200,14 +200,7 @@ const ProfilePage = () => {
               value={user.Email || ""}
               onChange={handleInputChange}
             />
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "row",
-                gap: "15rem",
-              }}
-            >
+            <div className="button-group">
               <button
                 className="cancel-btn"
                 onClick={() => setIsEditing(false)}
@@ -219,7 +212,7 @@ const ProfilePage = () => {
                 onClick={updateProfile}
                 disabled={updating}
               >
-                <FaCheckCircle className="icons" />{" "}
+                <FaCheckCircle className="icons" />
                 {updating ? "Updating..." : "Save Changes"}
               </button>
             </div>
@@ -247,14 +240,7 @@ const ProfilePage = () => {
               value={formState.confirmPassword}
               onChange={handleInputChange}
             />
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "row",
-                gap: "15rem",
-              }}
-            >
+            <div className="button-group">
               <button
                 className="cancel-btn"
                 onClick={() => setIsChangingPassword(false)}
@@ -266,7 +252,7 @@ const ProfilePage = () => {
                 onClick={handleChangePassword}
                 disabled={updating}
               >
-                <FaCheckCircle className="icons" />{" "}
+                <FaCheckCircle className="icons" />
                 {updating ? "Updating..." : "Save Password"}
               </button>
             </div>

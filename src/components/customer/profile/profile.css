@@ -140,6 +140,13 @@
   border-radius: 50%;
 }
 
+.button-group {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 15rem; /* Adjust spacing as needed */
+}
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .profile-page {
