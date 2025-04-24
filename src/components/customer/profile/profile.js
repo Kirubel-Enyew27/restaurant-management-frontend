@@ -8,7 +8,6 @@ import "./profile.css";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [userID, setUserID] = useState("");
@@ -40,7 +39,6 @@ const ProfilePage = () => {
   useEffect(() => {
     if (userID) {
       const fetchUserData = async () => {
-        setLoading(true);
         try {
           const response = await Axios.get(`/v1/customer/${userID}`);
           setUser(response.data.data);
@@ -48,7 +46,6 @@ const ProfilePage = () => {
           console.error("Error fetching user data:", error);
           toast.error("Failed to load user profile.");
         } finally {
-          setLoading(false);
         }
       };
 
