@@ -137,7 +137,6 @@ const ProfilePage = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
   if (!user) return <div>User not found</div>;
 
   return (
