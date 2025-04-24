@@ -19,6 +19,7 @@ function App() {
         <Route path="/customer/profile" element={<ProfilePage />} />
         <Route path="/food/add" element={<Add />} />
         <Route path="/food/menu" element={<Menu />} />
+        <Route path="/" element={<Menu />} />
         <Route path="/cart/item" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
