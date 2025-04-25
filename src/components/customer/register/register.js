@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Row,
-} from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Axios from "../../axiosInstance/axiosInstance";
 import "./register.css";
 
@@ -17,8 +11,6 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,22 +24,20 @@ function Register() {
     };
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
 
     try {
-      const response = await Axios.post("/v1/customer/register", userData);
+      await Axios.post("/v1/customer/register", userData);
 
-      setMessage(response.data.message || "Registration successful!");
-      setError(false);
+      toast.success("Registration successful!");
       setUsername("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
     } catch (err) {
-      setMessage(err.response?.data?.message || "Registration failed");
-      setError(true);
+      toast.error("Registration failed");
     }
   };
 
@@ -61,17 +51,13 @@ function Register() {
 
   return (
     <div className="register-container">
+      <ToastContainer position="top-right" autoClose={3000} />
       <Container>
         <Row className="justify-content-center">
           <Col xs={12} md={6} lg={4}>
             <Card className="register-card">
               <Card.Body>
                 <h2 className="text-center mb-4">Register</h2>
-                {message && (
-                  <Alert variant={error ? "danger" : "success"}>
-                    {message}
-                  </Alert>
-                )}
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3" controlId="formUsername">
                     <Form.Label>Username</Form.Label>
