@@ -103,7 +103,11 @@ const ProfilePage = () => {
   const updateProfile = async () => {
     setUpdating(true);
     try {
-      const response = await Axios.patch(`/v1/customer/update/${userID}`, user);
+      const { Username, Email } = user;
+      const response = await Axios.patch(`/v1/customer/update/${userID}`, {
+        Username,
+        Email,
+      });
       setUser(response.data.data);
       toast.success("Profile updated successfully!");
       setIsEditing(false);
