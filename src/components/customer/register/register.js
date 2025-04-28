@@ -36,6 +36,9 @@ function Register() {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+      setTimeout(() => {
+        navigate("/customer/login");
+      }, 3000);
     } catch (err) {
       toast.error("Registration failed");
     }
